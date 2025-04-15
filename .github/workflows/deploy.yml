@@ -22,17 +22,13 @@ jobs:
         with:
           python-version: '3.13'
 
-      - name: PWD
-        run: |
-          pwd
-
       - name: Install dependencies
         run: |
-          pip install -r generate/requirements.txt
+          pip install -r ./generate/requirements.txt
 
       - name: Generate site
         run: |
-          python generate/generate.py
+          python ./generate/generate.py
 
       - name: Upload HTML output
         uses: actions/upload-artifact@v4
