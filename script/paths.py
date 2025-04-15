@@ -1,7 +1,8 @@
 from pathlib import Path
 
-GENERATOR_DIRECTORY = Path(__file__).parent.parent.resolve()
+GENERATOR_DIRECTORY = Path(__file__).parent.parent.resolve() / Path("site")
 GENERATOR_CSS_DIRECTORY = GENERATOR_DIRECTORY / Path("css")
+GENERATOR_TEMPLATE_DIRECTORY = GENERATOR_DIRECTORY / Path("templates")
 
 SOURCE_DIRECTORY = Path.cwd() / Path("docs")
 SOURCE_INDEX_FILE = SOURCE_DIRECTORY / Path("index.md")
