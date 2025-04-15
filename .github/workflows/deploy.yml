@@ -15,10 +15,9 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/setup-node@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
@@ -31,9 +30,9 @@ jobs:
           python generate/generate.py
 
       - name: Upload HTML output
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
           path: static
 
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
