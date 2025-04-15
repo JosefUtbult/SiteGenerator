@@ -1,6 +1,6 @@
 from pathlib import Path
 
-OUTPUT_DIRECTORY = Path("../static")
+OUTPUT_DIRECTORY = Path(__file__).parent.parent.resolve() / Path("static")
 
 def setup():
     OUTPUT_DIRECTORY.mkdir(parents=True, exist_ok=True)
