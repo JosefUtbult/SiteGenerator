@@ -11,5 +11,9 @@ if __name__ == '__main__':
 
     index = OUTPUT_DIRECTORY / Path('index.html')
     print(f"Writing index to {index}")
-    with open(index, 'w') as index:
-        index.write("<h1>Hello World!</h1>")
+
+    with open(index, 'w') as file:
+        file.write("<h1>Hello World!</h1>")
+
+    with open(index, 'r') as file:
+        print(f"Result: {file.read()}")
