@@ -1,4 +1,12 @@
 body {
 	background-color: var(--background-color);
 	color: var(--text-color);
+	
+	font-family: var(--text-font), sans-serif;
+	font-weight: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: var(--heading-font), sans-serif;
+	font-weight: normal;
 }

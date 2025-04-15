@@ -30,10 +30,14 @@ def setup():
     OUTPUT_DIRECTORY.mkdir(parents=True, exist_ok=True)
     OUTPUT_MEDIA_DIRECTORY.mkdir(parents=True, exist_ok=True)
     OUTPUT_CSS_DIRECTORY.mkdir(parents=True, exist_ok=True)
+    OUTPUT_FONT_DIRECTORY.mkdir(parents=True, exist_ok=True)
 
     copy_contents(OUTPUT_CSS_DIRECTORY, GENERATOR_CSS_DIRECTORY)
+    copy_contents(OUTPUT_FONT_DIRECTORY, GENERATOR_FONT_DIRECTORY)
 
     if SOURCE_CSS_DIRECTORY.is_dir():
         copy_contents(OUTPUT_CSS_DIRECTORY, SOURCE_CSS_DIRECTORY)
 
+    if SOURCE_FONT_DIRECTORY.is_dir():
+        copy_contents(OUTPUT_FONT_DIRECTORY, SOURCE_FONT_DIRECTORY)
 
