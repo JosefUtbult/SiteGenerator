@@ -22,6 +22,10 @@ jobs:
         with:
           python-version: '3.13'
 
+      - name: PWD
+        run: |
+          pwd
+
       - name: Install dependencies
         run: |
           pip install -r generate/requirements.txt
