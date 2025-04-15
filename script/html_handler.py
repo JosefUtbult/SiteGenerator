@@ -12,6 +12,7 @@ def format(content, relative_path):
     relative_root = os.path.relpath(OUTPUT_DIRECTORY, relative_path.parent)
     relative_css = relative_root / Path('css')
     relative_main_css = relative_css / Path('main.css')
+    relative_theme_css = relative_css / Path('theme.css')
 
     # Load the base template
     base_template = open(GENERATOR_TEMPLATE_DIRECTORY / Path("base.html")).read()
@@ -22,6 +23,7 @@ def format(content, relative_path):
     # Substitute the various comments in the template
     res = re.sub(r'<!--\s*title\s*-->', TITLE, base_template)
     res = re.sub(r'<!--\s*base_css\s*-->', str(relative_main_css), res)
+    res = re.sub(r'<!--\s*theme_css\s*-->', str(relative_theme_css), res)
     res = re.sub(r'<!--\s*content\s*-->', content, res)
 
     return res
