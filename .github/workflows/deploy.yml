@@ -41,7 +41,7 @@ jobs:
           python generate/generate.py
 
       - name: Upload HTML output
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v2
         with:
           name: github-pages
           path: static
