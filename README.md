@@ -1,6 +1,6 @@
 # Setup
 
-Use as a submodule
+Use as a submodule. Note that it must be named `generator` for the Github CI script to work
 
 ```bash
 git submodule add git@github.com:JosefUtbult/SiteGenerator.git generator
@@ -16,4 +16,10 @@ Add `static/` to `.gitignore`
 
 ```bash
 echo "static/" >> .gitignore
+```
+
+Copy `docs/` folder template
+
+```bash
+cp -r generator/docs_template docs
 ```

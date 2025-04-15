@@ -26,6 +26,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Locate Generator
+        id: locate_generator
+        run: |
+          echo "GENERATOR=$(git config --file .gitmodules --get-regexp path | awk '{ print $2 }' | grep generator)" >> $GITHUB_OUTPUT
 
       - name: Install Python
         uses: actions/setup-python@v5
@@ -33,12 +41,16 @@ jobs:
           python-version: '3.13'
 
       - name: Install dependencies
+        env:
+          GENERATOR: ${{ steps.locate_generator.outputs.GENERATOR }}
         run: |
-          pip install -r generate/requirements.txt
+          pip install -r $GENERATOR/script/requirements.txt
 
       - name: Generate site
+        env:
+          GENERATOR: ${{ steps.locate_generator.outputs.GENERATOR }}
         run: |
-          python generate/generate.py
+          python $GENERATOR/script/generate.py
 
       - name: Upload HTML output
         uses: actions/upload-pages-artifact@v3
