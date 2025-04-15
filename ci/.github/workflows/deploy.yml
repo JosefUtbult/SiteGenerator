@@ -44,6 +44,7 @@ jobs:
         env:
           GENERATOR: ${{ steps.locate_generator.outputs.GENERATOR }}
         run: |
+          sudo apt install pandoc &&
           pip install -r $GENERATOR/script/requirements.txt
 
       - name: Generate site
