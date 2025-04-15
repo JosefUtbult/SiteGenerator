@@ -9,5 +9,7 @@ if __name__ == '__main__':
     print(f"Generating static site into {OUTPUT_DIRECTORY}")
     setup()
 
-    with open(OUTPUT_DIRECTORY / Path('index.html'), 'w') as index:
+    index = OUTPUT_DIRECTORY / Path('index.html')
+    print(f"Writing index to {index}")
+    with open(index, 'w') as index:
         index.write("<h1>Hello World!</h1>")

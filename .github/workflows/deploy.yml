@@ -22,9 +22,6 @@ jobs:
         with:
           python-version: '3.13'
 
-      - name: List repo contents
-        run: ls -R
-
       - name: Install dependencies
         run: |
           pip install -r generate/requirements.txt
