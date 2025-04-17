@@ -22,6 +22,10 @@ def extract_images(pandoc_tree, relative_path):
         source_image_path = SOURCE_DIRECTORY / relative_image_path
         dest_image_path = OUTPUT_DIRECTORY / relative_image_path
 
+        if not source_image_path.is_file():
+            print(f"WARNING: Unable to find local image {source_image_path}")
+            continue
+
         print(f"Copy image {source_image_path} -> {dest_image_path}")
         dest_image_path.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source_image_path, dest_image_path)

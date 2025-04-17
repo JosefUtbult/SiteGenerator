@@ -4,9 +4,47 @@ body {
 	
 	font-family: var(--text-font), sans-serif;
 	font-weight: normal;
+
+	margin: 0;
+}
+
+#content {
+	padding: 0 10vw;
+}
+
+@media (max-width: 768px) {
+	#content {
+		padding: 0 2vw;
+	}
 }
 
 h1, h2, h3, h4, h5, h6 {
 	font-family: var(--heading-font), sans-serif;
 	font-weight: normal;
+}
+
+#content img {
+	width: 50%;
+	margin: 2rem 0;
+
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+	#content img {
+		width: 80%;
+		margin: 0 10%;
+		border-radius: 4px;
+	}
+}
+
+#content a {
+	color: var(--secondary-color-dim);
+	transition: color 0.3s ease;
+	text-decoration: none;
+}
+
+#content a:hover, a:active {
+	color: var(--secondary-color);
 }
