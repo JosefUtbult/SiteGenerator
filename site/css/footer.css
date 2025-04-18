@@ -1,0 +1,18 @@
+#site-footer {
+	margin-top: 4vh;
+	text-align: center;
+	padding: 1rem;
+	background-color: var(--background-color-dim);
+	color: var(--text-color);
+	font-size: 0.9rem;
+}
+
+#site-footer a {
+	color: var(--secondary-color-dim);
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+#site-footer a:hover {
+	color: var(--secondary-color);
+}

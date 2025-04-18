@@ -1,8 +1,16 @@
 :root {
-	--primary-color: #efb010;
-	--secondary-color: #a311ee;
-	--background-color: #1b1b1b;
-	--text-color: #ffffff;
+	--primary-color: #f3b252;
+	--primary-color-dim: #eda547;
 
-	--heading-font: 'Oswald'
+	--secondary-color: #35c84c;
+	--secondary-color-dim: #2bbd42;
+
+	--background-color: #ffffff;
+	--background-color-dim: #dfdfdf;
+
+	--text-color: #020202;
+	--text-color-dim: #000000;
+
+	--heading-font: 'Oswald';
+	--text-font: 'Quicksand';
 }

@@ -36,8 +36,7 @@ def generate_tree(index_file):
 
         # If the respting filename is the same as the directory name it is under,
         # handle it as if it was the parent directory
-        formated_title = title.lower().replace(' ', '_')
-        if root_key == formated_title and previous_root is not None:
+        if root_key == title and previous_root is not None:
             del previous_root[root_key]
             previous_root[title] = str(relative_root)
         else:
@@ -48,7 +47,9 @@ def generate_tree(index_file):
 
 def recursivly_generate_string(tree, current_level):
     # You can't use spaces in html paragraphs
-    indentation = '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'
+    spaces_per_indentation = int(get_from_def_file("NAVIGATION_SPACES_PER_INDENTATION", "6"))
+
+    indentation = '&nbsp' * spaces_per_indentation
     res = ""
 
     for key in tree:
@@ -60,7 +61,7 @@ def recursivly_generate_string(tree, current_level):
             sub_branch_char = '│'
         elif key == list(tree.keys())[-1]:
             branch_char = '└'
-            sub_branch_char = '&nbsp&nbsp'
+            sub_branch_char = '&nbsp' * int(spaces_per_indentation / 3)
         else:
             branch_char = '├'
             sub_branch_char = '│'
