@@ -17,6 +17,10 @@
 	}
 }
 
+#site-header p {
+	display: none
+}
+
 #logo-link {
 	min-width: 30%;
 	color: var(--primary-color-dim);
@@ -45,9 +49,18 @@
 	transition: background-color 0.3s ease;
 	max-width: 100%;
 	white-space: nowrap;
+	text-decoration: none;
+	display: inline-block;
 }
 
-.index-button:hover {
+.index-button:hover,
+.index-button:active,
+.index-button:visited {
+	color: white;
+	text-decoration: none;
+}
+
+.index-button:hover,
+.index-button:active {
 	background-color: var(--primary-color);
 }
-

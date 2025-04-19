@@ -45,7 +45,7 @@ def generate_tree(index_file):
     return tree
 
 
-def recursivly_generate_string(tree, current_level):
+def generate_tree_view_recursivly(tree, current_level):
     # You can't use spaces in html paragraphs
     spaces_per_indentation = int(get_from_def_file("NAVIGATION_SPACES_PER_INDENTATION", "6"))
 
@@ -68,7 +68,7 @@ def recursivly_generate_string(tree, current_level):
 
         if type(item) is dict:
             res += f'{branch_char}── {key}\n'
-            sub_res = recursivly_generate_string(item, current_level + 1)
+            sub_res = generate_tree_view_recursivly(item, current_level + 1)
             for line in [line for line in sub_res.split('\n') if len(line)]:
                 res += f'{sub_branch_char}{indentation}{line}\n'
 
@@ -78,13 +78,47 @@ def recursivly_generate_string(tree, current_level):
     return res
 
 
+def generate_tree_view(tree):
+    res = generate_tree_view_recursivly(tree, 0)
+    res = ''.join([f"    <p>{line}</p>\n" for line in res.split('\n') if len(line)])
+    return res
+
+
+def generate_list_view_recursivly(tree, current_level):
+    res = ""
+
+    for key in tree:
+        item = tree[key]
+
+        if type(item) is dict:
+            res += f'      <li>{key}\n'
+            res += f'        <ul>\n'
+            sub_res = generate_list_view_recursivly(item, current_level + 1)
+            for line in [line for line in sub_res.split('\n') if len(line)]:
+                res += f'    {line}\n'
+            res += f'        </ul>\n'
+            res += f'      </li>\n'
+
+        else:
+            res += f'      <li><a href="{item}">{key}</a></li>\n'
+
+    return res
+
+
+def generate_list_view(tree):
+    return f'    <ul>\n{generate_list_view_recursivly(tree, 1)}    </ul>\n'
+
+
 def generate_index():
     index_file = OUTPUT_DIRECTORY / Path('navigation.html')
 
     tree = generate_tree(index_file)
-    res = recursivly_generate_string(tree, 0)
 
-    res = ''.join([f"    <p>{line}</p>\n" for line in res.split('\n') if len(line)])
+    index_view = get_from_def_file("NAVIGATION_VIEW", None)
+    if index_view == "tree":
+        res = generate_tree_view(tree)
+    else:
+        res = generate_list_view(tree)
 
     # Add a title
     res = f'  <h1>Index</h1>\n  <div class="navigation">\n{res}  </div>'

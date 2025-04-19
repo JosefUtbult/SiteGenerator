@@ -67,13 +67,13 @@ def format_footer(footer_template, relative_root):
     about_me_relative_root = relative_root / Path("about.html")
     about_me_string = ""
     if about_me_file.is_file():
-        about_me_string = f'<a href="{about_me_relative_root}">About{about_entity}</a>'
+        about_me_string = f'<p><a href="{about_me_relative_root}">About{about_entity}</a></p>'
 
     about_this_site_file = SOURCE_DIRECTORY / Path("about_site.md")
     about_this_site_relative_root = relative_root / Path("about_site.html")
     about_this_site_string = ""
     if about_this_site_file.is_file():
-        about_this_site_string = f'<a href="{about_this_site_relative_root}">About this site</a>'
+        about_this_site_string = f'<p><a href="{about_this_site_relative_root}">About this site</a></p>'
 
     res = re.sub(r"<!--\s*contact\s*-->", contact_string, footer_template)
     res = re.sub(r"<!--\s*about\s*-->", about_me_string, res)
