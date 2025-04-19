@@ -12,7 +12,7 @@ def iterate_and_generate():
 
         print(f"Generating {source_path} -> {dest_path}")
 
-        pandoc_tree = pandoc.read(file=source_path, format='markdown')
+        pandoc_tree = pandoc.read(file=source_path, format='markdown+wikilinks_title_after_pipe')
 
         extract_images(pandoc_tree, relative_path)
 

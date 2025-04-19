@@ -50,6 +50,38 @@ def format_header(header_template, relative_root, site_name):
     return header_template
 
 
+def format_footer(footer_template, relative_root):
+    contact_mail = get_from_def_file("CONTACT_EMAIL", None)
+    if contact_mail:
+        contact_string = f'<p>Contact: <a href="mailto:{contact_mail}">{contact_mail}</a></p>'
+    else:
+        contact_string = ""
+
+    about_entity = get_from_def_file("ABOUT_ENTITY", None)
+    if not about_entity:
+        about_entity = ""
+    else:
+        about_entity = f" {about_entity}"
+
+    about_me_file = SOURCE_DIRECTORY / Path("about.md")
+    about_me_relative_root = relative_root / Path("about.html")
+    about_me_string = ""
+    if about_me_file.is_file():
+        about_me_string = f'<a href="{about_me_relative_root}">About{about_entity}</a>'
+
+    about_this_site_file = SOURCE_DIRECTORY / Path("about_site.md")
+    about_this_site_relative_root = relative_root / Path("about_site.html")
+    about_this_site_string = ""
+    if about_this_site_file.is_file():
+        about_this_site_string = f'<a href="{about_this_site_relative_root}">About this site</a>'
+
+    res = re.sub(r"<!--\s*contact\s*-->", contact_string, footer_template)
+    res = re.sub(r"<!--\s*about\s*-->", about_me_string, res)
+    res = re.sub(r"<!--\s*about_site\s*-->", about_this_site_string, res)
+
+    return res
+
+
 def format_base(base_template, relative_root, site_name):
     # Use a css path relative to the current file to be compatible with
     # viewing the site on a local machine
@@ -81,6 +113,9 @@ def format_content(base_template, content):
 
     # Add a width to each img element, to keep support for non-css browsers
     res = re.sub(r"<img\b[^>]*>", add_width_to_img_tag, res)
+
+    # Substitute all URLs to markdown documents to html
+    res = re.sub(r'(<a[^>]+href=["\'])([^"\']+?)\.md(["\'])', r'\1\2.html\3', res)
 
     return res
 
@@ -119,6 +154,7 @@ def format(content, relative_path):
 
     base_template = format_base(base_template, relative_root, site_name)
     header_template = format_header(header_template, relative_root, site_name)
+    footer_template = format_footer(footer_template, relative_root)
     base_template = format_content(base_template, content)
     base_template = insert_header_and_footer(base_template, header_template, footer_template)
 
